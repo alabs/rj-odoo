@@ -6,6 +6,9 @@
   tasks:
     - name: install aptitude with apt
       apt: name=aptitude update_cache=yes force_apt_get=yes
+    - name: Upgrade system packages
+      apt:
+        upgrade: dist
     - name: Install required system packages
       apt: name={{ item }} update_cache=yes
       loop: [ 'apt-transport-https', 'ca-certificates', 'curl', 'git', 'software-properties-common', 'python3-pip', 'virtualenv', 'python3-setuptools']
@@ -28,6 +31,7 @@
     - name: Allow user to use docker without sudo
       user:
         name: odoo
+        shell: /bin/bash
         groups: docker
         append: yes
     - name: Clone repo
