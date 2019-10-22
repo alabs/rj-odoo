@@ -23,10 +23,8 @@
       pip:
         name: docker
     - name: Install docker-compose
-      get_url:
-        url: "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-{{ ansible_system }}-{{ ansible_architecture }}"
-        dest: /usr/local/bin/docker-compose
-        mode: "+x"
+      pip:
+        name: docker-compose
     - name: Allow user to use docker without sudo
       user:
         name: odoo
