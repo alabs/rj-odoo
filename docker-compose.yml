@@ -3,6 +3,7 @@ version: "3"
 services:
   odoo:
     image: odoo:12
+    restart: always
     ports:
       - 8069:8069
     depends_on:
@@ -13,6 +14,7 @@ services:
       - ./addons:/mnt/extra-addons
   db:
     image: postgres:alpine
+    restart: always
     env_file:
       - .db.env
     volumes:
