@@ -1,6 +1,8 @@
 ---
 - hosts: all
   become: true
+  vars:
+    password: "{{ lookup('password', '/tmp/passwordfile chars=ascii_letters') }}"
   tasks:
     - name: install aptitude with apt
       apt: name=aptitude update_cache=yes force_apt_get=yes
@@ -37,6 +39,20 @@
         repo: "https://github.com/alabs/rj-odoo"
         version: master
         dest: /home/odoo/odoo
+    - name: Fill odoo credentials
+      template:
+        src: templates/odoo.env.j2
+        dest: /home/odoo/odoo/.odoo.env
+        owner: odoo
+        group: odoo
+        mode: 0640
+    - name: Fill db credentials
+      template:
+        src: templates/db.env.j2
+        dest: /home/odoo/odoo/.db.env
+        owner: odoo
+        group: odoo
+        mode: 0640
     - name: Run docker compose up
       become: yes
       become_user: odoo

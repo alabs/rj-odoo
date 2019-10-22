@@ -1,0 +1,19 @@
+---
+version: "3"
+services:
+  odoo:
+    image: odoo:12
+    ports:
+      - 8069:8069
+    depends_on:
+      - db
+    env_file:
+      - .odoo.env
+    volumes:
+      - ./addons:/mnt/extra-addons
+  db:
+    image: postgresql:alpine
+    env_file:
+      - .db.env
+    volumes:
+      - ./database:/var/lib/postgresql/data/pgdata
