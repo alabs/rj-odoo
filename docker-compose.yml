@@ -13,7 +13,7 @@ services:
     volumes:
       - ./addons:/mnt/extra-addons
   db:
-    image: postgres:alpine
+    image: postgres:10-alpine
     restart: always
     env_file:
       - .db.env
