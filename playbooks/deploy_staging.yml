@@ -1,0 +1,17 @@
+---
+- hosts: staging
+  become: true
+  tasks:
+    - name: Clone repo
+      become: yes
+      become_user: odoo
+      git:
+        repo: "https://github.com/alabs/rj-odoo"
+        version: master
+        dest: /home/odoo/odoo
+    - name: Run docker compose up
+      become: yes
+      become_user: odoo
+      docker_compose:
+        project_src: /home/odoo/odoo
+        restarted: yes
