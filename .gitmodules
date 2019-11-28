@@ -1,5 +1,8 @@
 [submodule "addons/rj-records"]
-	path = addons/rj_records
+  path = addons/rj_records
   url = https://github.com/alabs/rj-records.git
   branch = master
-
+[submodule "addons/project"]
+  path = addons/project
+  url = git@github.com:OCA/project.git
+  branch = 12.0
