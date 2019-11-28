@@ -4,5 +4,5 @@
   branch = master
 [submodule "addons/project"]
   path = addons/project
-  url = git@github.com:OCA/project.git
-  branch = 12.0
+  url = https://github.com/OCA/project.git
+  branch = "12.0"
