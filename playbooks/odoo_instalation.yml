@@ -39,6 +39,7 @@
       become_user: odoo
       git:
         repo: "https://github.com/alabs/rj-odoo"
+        force: yes
         version: master
         dest: /home/odoo/odoo
     - name: Fill odoo credentials
