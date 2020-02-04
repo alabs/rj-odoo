@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<odoo>
+  <record id="project_file_form" model="ir.ui.view">
+    <field name="name">project.project.file.view.form</field>
+    <field name="model">project.project</field>
+    <field name="inherit_id" ref="project.edit_project"/>
+    <field name="arch" type="xml">
+      <xpath expr="//field[@name='user_id']" position="after">
+        <field name="file_attachment" invisible="1" widget="many2many_tags"/>
+      </xpath>
+    </field>
+  </record>
+
+  <record id="project_other_payer_form" model="ir.ui.view">
+    <field name="name">project.project.rj_other.view.form</field>
+    <field name="model">project.project</field>
+    <field name="inherit_id" ref="rj_records.edit_project"/>
+    <field name="arch" type="xml">
+      <xpath expr="//field[@name='subject_id']" position="after">
+        <field name="other_payer"/>
+      </xpath>
+    </field>
+  </record>
+
+  <record id="project_file_tree" model="ir.ui.view">
+    <field name="name">project.project.file.view.tree</field>
+    <field name="model">project.project</field>
+    <field name="inherit_id" ref="project.view_project"/>
+    <field name="arch" type="xml">
+      <xpath expr="//tree" position="inside">
+        <field name="file_attachment" widget="many2many_tags"/>
+      </xpath>
+    </field>
+
+  </record>
+
+   <record id="ir_sequence_project_number" model="ir.sequence">
+      <field name="name">project.project</field>
+      <field name="code">project.project</field>
+      <field name="prefix">0</field>
+      <field name="padding">2</field>
+     <field name="number_increment">1</field>
+     <field name="suffix">/%(range_year)s</field>
+  </record>
+
+
+</odoo>

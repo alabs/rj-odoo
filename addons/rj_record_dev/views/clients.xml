@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<odoo>
+  <record id="view_partner_form_rj_form" model="ir.ui.view">
+    <field name="name">res.partner.rj.view.form</field>
+    <field name="model">res.partner</field>
+    <field name="inherit_id" ref="base.view_partner_form"/>
+    <field name="arch" type="xml">
+      <xpath expr="//field[@name='vat']" position="attributes">
+        <attribute name="string">DNI / CIF / NIE</attribute>
+      </xpath>
+    </field>
+  </record>
+
+
+</odoo>
