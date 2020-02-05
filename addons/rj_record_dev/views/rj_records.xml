@@ -19,8 +19,12 @@
       <xpath expr="//field[@name='subject_id']" position="after">
         <field name="other_payer"/>
       </xpath>
+      <xpath expr="//field[@name='procurer']" position="after">
+        <field name="code"/>
+      </xpath>
     </field>
   </record>
+
 
   <record id="project_file_tree" model="ir.ui.view">
     <field name="name">project.project.file.view.tree</field>
@@ -29,6 +33,7 @@
     <field name="arch" type="xml">
       <xpath expr="//tree" position="inside">
         <field name="file_attachment" widget="many2many_tags"/>
+        <field name="code"/>
       </xpath>
     </field>
 
