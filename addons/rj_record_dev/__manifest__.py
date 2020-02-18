@@ -11,7 +11,7 @@
     'website': 'https://alabs.org',
     'category': 'Project',
     'license': 'AGPL-3',
-    'version': '0.2',
+    'version': '0.3',
     'installable': True,
     'application': True,
 
@@ -23,6 +23,10 @@
         'views/rj_records.xml',
         'views/clients.xml',
         'views/rj_ir_attachment.xml',
+        'report/project_report.xml',
+        'report/account_invoice_report.xml',
+        'report/account_income_area_report.xml',
+        'security/ir.model.access.csv',
     ],
 
     'demo': [

@@ -1,0 +1,4 @@
+"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
+"access_report_project_task_stage","access_report_project_task_stage","model_report_project_task_stage","",1,1,1,1
+"access_report_account_income_viz","access_report_account_income_viz","model_report_account_income_viz","",1,1,1,1
+"access_report_account_income_area","access_report_account_income_area","model_report_account_income_area","",1,1,1,1

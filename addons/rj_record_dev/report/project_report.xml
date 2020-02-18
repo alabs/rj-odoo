@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="project_state_graph_id" model="ir.ui.view">
+        <field name="name">project.project.state</field>
+        <field name="model">report.project.task.stage</field>
+        <field name="arch" type="xml">
+            <graph string="Project States" type="bar">
+
+                <field name="user_id"/>
+                <field name="state"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="action_for_project_graph" model="ir.actions.act_window">
+    <field name="name">Project Stage Analysis</field>
+    <field name="res_model">report.project.task.stage</field>
+    <field name="view_type">form</field>
+    <field name="view_mode">graph</field>
+    <field name="view_id" ref="project_state_graph_id"/>
+</record>
+
+    <menuitem id="menu_project_report_state_analysis"
+            name="Project Stage Analysis"
+            action="action_for_project_graph"
+            parent="project.menu_project_report"
+            sequence="10"/>
+
+
+</odoo>

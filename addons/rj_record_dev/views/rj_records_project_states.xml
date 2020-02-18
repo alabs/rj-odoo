@@ -1,29 +1,5 @@
 <?xml version="1.0"?>
 <odoo>
-  <record id="project_file_form" model="ir.ui.view">
-    <field name="name">project.project.file.view.form</field>
-    <field name="model">project.project</field>
-    <field name="inherit_id" ref="project.edit_project"/>
-    <field name="arch" type="xml">
-      <xpath expr="//field[@name='user_id']" position="after">
-        <field name="file_attachment" invisible="1" widget="many2many_tags"/>
-      </xpath>
-    </field>
-  </record>
-
-  <record id="project_other_payer_form" model="ir.ui.view">
-    <field name="name">project.project.rj_other.view.form</field>
-    <field name="model">project.project</field>
-    <field name="inherit_id" ref="rj_records.edit_project"/>
-    <field name="arch" type="xml">
-      <xpath expr="//field[@name='subject_id']" position="after">
-        <field name="other_payer"/>
-      </xpath>
-      <xpath expr="//field[@name='procurer']" position="after">
-        <field name="code"/>
-      </xpath>
-    </field>
-  </record>
 
   <record id="view_task_project_user_rj_search" model="ir.ui.view">
       <field name="name">report.project.task.user.search.rj</field>
@@ -83,7 +59,6 @@
              </graph>
          </field>
     </record>
-
   <record id="project_file_tree" model="ir.ui.view">
     <field name="name">project.project.file.view.tree</field>
     <field name="model">project.project</field>
