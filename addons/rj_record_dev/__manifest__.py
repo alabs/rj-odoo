@@ -11,7 +11,7 @@
     'website': 'https://alabs.org',
     'category': 'Project',
     'license': 'AGPL-3',
-    'version': '0.3',
+    'version': '0.4',
     'installable': True,
     'application': True,
 
