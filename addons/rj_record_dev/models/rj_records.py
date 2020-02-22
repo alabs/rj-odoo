@@ -3,6 +3,7 @@
 import logging
 _logger = logging.getLogger(__name__)
 from odoo import api, fields, models, tools,_
+from odoo.exceptions import UserError,ValidationError
 
 
 class ProjectProject(models.Model):
@@ -10,6 +11,12 @@ class ProjectProject(models.Model):
 
     file_attachment = fields.Many2many('ir.attachment',compute="compute_get_attached_file",string="File(s)")
     other_payer = fields.Many2one('res.partner', string="Other Payer")
+    physical_box = fields.Integer("Physical Box",help="Enter 4 digits")
+
+    @api.constrains('physical_box')
+    def _constaint_physical_box(self):
+        if len(str(self.physical_box)) != 4:
+            raise ValidationError(_('Physical Box must contain 4 digits numeric'))
 
     def compute_get_attached_file(self):
         file_list = []
@@ -66,6 +73,6 @@ class ReportProjectTaskUser(models.Model):
             CREATE view %s as
                       %s
                       FROM project_task t JOIN project_project p ON t.project_id = p.id
-                        WHERE t.active = 'true'
+                        WHERE t.active = 'true' AND state='open'
                         %s
                 """ % (self._table, self._select(), self._group_by()))

@@ -1,33 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <record id="view_task_project_user_search" model="ir.ui.view">
-            <field name="name">report.project.task.user.search</field>
-            <field name="model">report.project.task.user</field>
+    <record id="view_report_account_income_viz_search" model="ir.ui.view">
+            <field name="name">report.account.income.viz.search</field>
+            <field name="model">report.account.income.viz</field>
             <field name="arch" type="xml">
-                <search string="Tasks Analysis">
-                    <field name="date_start"/>
-                    <field name="date_end"/>
-                    <field name="date_deadline"/>
-                    <field name="date_last_stage_update"/>
-                    <field name="project_id"/>
-                    <field name="user_id"/>
-                    <field name="partner_id" filter_domain="[('partner_id', 'child_of', self)]"/>
-                    <field name="stage_id"/>
-                    <filter string="Unassigned" name="unassigned" domain="[('user_id','=',False)]"/>
-                    <separator/>
-                    <filter string="New" name="new" domain="[('stage_id.sequence', '&lt;=', 1)]"/>
-                    <group expand="0" string="Extended Filters">
-                        <field name="priority"/>
-                        <field name="company_id" groups="base.group_multi_company"/>
-                    </group>
+                <search string="Expense/Income Group">
+
+                    <field name="income"/>
+                    <field name="expense"/>
+                    <field name="from_where_the_value_comming"/>
+                     <field name="date_time" interval="month"/>
                     <group expand="1" string="Group By">
-                        <filter string="Project" name="project" context="{'group_by':'project_id'}"/>
-                        <filter string="Task" name="task" context="{'group_by':'name'}"/>
-                        <filter string="Assigned to" name="User" context="{'group_by':'user_id'}"/>
-                        <filter string="Stage" name="Stage" context="{'group_by':'stage_id'}"/>
-                        <filter string="Company" name="company" context="{'group_by':'company_id'}" groups="base.group_multi_company"/>
-                        <separator/>
-                        <filter string="Assignation Date" name="assignation_month" context="{'group_by':'date_start:month'}"/>
+                        <filter string="Income" name="income" context="{'group_by':'income'}"/>
+                        <filter string="Expense" name="expense" context="{'group_by':'expense'}"/>
+                        <filter string="Expense/Income" name="expense" context="{'group_by':'from_where_the_value_comming'}"/>
+                        <filter string="Date" name="date_time" context="{'group_by':'date_time'}"/>
                     </group>
                 </search>
             </field>
@@ -38,8 +25,10 @@
         <field name="arch" type="xml">
             <graph string="Account Income" type="bar">
 
-                <field name="date_time" interval="month"/>
-                <field name="income" type="measure"/>
+                <field name="date_time" type="row" interval="month"/>
+                <field name="from_where_the_value_comming" type="row"/>
+
+                <field name="income"  type="measure" />
                 <field name="expense" type="measure"/>
             </graph>
         </field>

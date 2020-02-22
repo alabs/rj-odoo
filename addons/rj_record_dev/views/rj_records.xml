@@ -18,6 +18,7 @@
     <field name="arch" type="xml">
       <xpath expr="//field[@name='subject_id']" position="after">
         <field name="other_payer"/>
+        <field name="physical_box" attrs="{'readonly': [('state', '=', 'open')]}"/>
       </xpath>
       <xpath expr="//field[@name='procurer']" position="after">
         <field name="code"/>
@@ -74,13 +75,13 @@
         <field name="model">report.project.task.user</field>
         <field name="inherit_id" ref="project.view_task_project_user_graph" />
         <field name="arch" type="xml">
-            <graph string="Tasks Analysis" type="bar">
+<!--            <graph string="Tasks Analysis" type="bar">-->
                 <field name="project_id" position="after">
                     <field name="complexity" type="measure"/>
                     <field name="user_id" type="row"/>
 
                 </field>
-             </graph>
+<!--             </graph>-->
          </field>
     </record>
 
