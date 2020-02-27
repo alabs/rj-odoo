@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_area_user_search" model="ir.ui.view">
+        <field name="name">report.account.income.area.search</field>
+        <field name="model">report.account.income.area</field>
+        <field name="arch" type="xml">
+            <search string="Income Analysis">
+                <field name="area"/>
+                <field name="lawyer_id"/>
+                <group expand="1" string="Group By">
+                    <filter string="Area" name="area" context="{'group_by':'area'}"/>
+                    <filter string="Lawyer" name="lawyer_id" context="{'group_by':'lawyer_id'}"/>
+
+                </group>
+            </search>
+        </field>
+    </record>
+    <record id="account_income_area_graph_id" model="ir.ui.view">
+        <field name="name">report.account.income.area</field>
+        <field name="model">report.account.income.area</field>
+        <field name="arch" type="xml">
+            <graph string="Account Income" type="bar">
+                <field name="date_time" interval="month"/>
+                <field name="area"/>
+                <field name="lawyer_id"/>
+                <field name="average" type="measure"/>
+                <field name="income_percentage" type="measure"/>
+<!--                <field name="income" type="measure"/>-->
+
+
+            </graph>
+        </field>
+    </record>
+
+    <record id="action_areafor_income_graph" model="ir.actions.act_window">
+        <field name="name">Accounting Income Area/Lawyer Wise</field>
+        <field name="res_model">report.account.income.area</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">graph</field>
+        <field name="view_id" ref="account_income_area_graph_id"/>
+        <field name="search_view_id" ref="view_area_user_search"/>
+    </record>
+
+    <menuitem id="menu_account_income_area_report_state_analysis"
+            name="Accounting Income Wise Analysis"
+            action="action_areafor_income_graph"
+            parent="accounting_pdf_reports.menu_finance_legal_statement"
+            sequence="10"/>
+
+
+</odoo>

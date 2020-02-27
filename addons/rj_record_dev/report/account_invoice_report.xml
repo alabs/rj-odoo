@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_report_account_income_viz_search" model="ir.ui.view">
+            <field name="name">report.account.income.viz.search</field>
+            <field name="model">report.account.income.viz</field>
+            <field name="arch" type="xml">
+                <search string="Expense/Income Group">
+
+                    <field name="income"/>
+                    <field name="expense"/>
+                    <field name="from_where_the_value_comming"/>
+                     <field name="date_time" interval="month"/>
+                    <group expand="1" string="Group By">
+                        <filter string="Income" name="income" context="{'group_by':'income'}"/>
+                        <filter string="Expense" name="expense" context="{'group_by':'expense'}"/>
+                        <filter string="Expense/Income" name="expense" context="{'group_by':'from_where_the_value_comming'}"/>
+                        <filter string="Date" name="date_time" context="{'group_by':'date_time'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+    <record id="account_income_graph_id" model="ir.ui.view">
+        <field name="name">report.account.income.viz</field>
+        <field name="model">report.account.income.viz</field>
+        <field name="arch" type="xml">
+            <graph string="Account Income" type="bar">
+
+                <field name="date_time" type="row" interval="month"/>
+                <field name="from_where_the_value_comming" type="row"/>
+
+                <field name="income"  type="measure" />
+                <field name="expense" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="action_for_income_graph" model="ir.actions.act_window">
+    <field name="name">Accounting Income / Expenses</field>
+    <field name="res_model">report.account.income.viz</field>
+    <field name="view_type">form</field>
+    <field name="view_mode">graph</field>
+    <field name="view_id" ref="account_income_graph_id"/>
+</record>
+
+    <menuitem id="menu_account_income_report_state_analysis"
+            name="Accounting Income / Expenses Analysis"
+            action="action_for_income_graph"
+            parent="accounting_pdf_reports.menu_finance_legal_statement"
+            sequence="10"/>
+
+
+</odoo>
