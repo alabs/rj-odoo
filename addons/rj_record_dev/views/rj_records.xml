@@ -18,7 +18,7 @@
     <field name="arch" type="xml">
       <xpath expr="//field[@name='subject_id']" position="after">
         <field name="other_payer"/>
-        <field name="physical_box" attrs="{'readonly': [('state', '=', 'open')]}"/>
+        <field name="physical_box" attrs="{'readonly': [('state', '!=', 'closed')]}"/>
       </xpath>
       <xpath expr="//field[@name='procurer']" position="after">
         <field name="code"/>
