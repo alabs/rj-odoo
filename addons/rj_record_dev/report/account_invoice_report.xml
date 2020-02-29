@@ -45,7 +45,7 @@
     <menuitem id="menu_account_income_report_state_analysis"
             name="Accounting Income / Expenses Analysis"
             action="action_for_income_graph"
-            parent="accounting_pdf_reports.menu_finance_legal_statement"
+            parent="account.menu_finance_reports"
             sequence="10"/>
 
 
