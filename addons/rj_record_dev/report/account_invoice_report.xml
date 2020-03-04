@@ -27,9 +27,8 @@
 
                 <field name="date_time" type="row" interval="month"/>
                 <field name="from_where_the_value_comming" type="row"/>
-
-                <field name="income"  type="measure" />
                 <field name="expense" type="measure"/>
+                <field name="income"  type="measure" />
             </graph>
         </field>
     </record>
