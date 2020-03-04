@@ -12,8 +12,8 @@ class ReportAccountReport(models.Model):
 
     name = fields.Char(string='Project Title', readonly=True)
     nbr = fields.Integer('# of Tasks', readonly=True)
-    income = fields.Float('Income', readonly=True)
-    expense = fields.Float('Expense', readonly=True)
+    income = fields.Float('Expense', readonly=True)
+    expense = fields.Float('Income', readonly=True)
     expense_income = fields.Float('Expense/Income', readonly=True,compute="compute_expense_income",store=True)
     from_where_the_value_comming = fields.Char('Expense/Income')
     date_time = fields.Datetime('Intervals')
@@ -35,10 +35,10 @@ class ReportAccountReport(models.Model):
                         COALESCE(SUM(debit),0) - COALESCE(SUM(credit), 0) as balance,account_move_line.create_date as date_time,
                         greatest(COALESCE(SUM(debit), 0), COALESCE(SUM(credit), 0)) AS expense_income,
 
-                        CASE WHEN COALESCE(SUM(debit) > COALESCE(SUM(credit), 0)) THEN 'income'
-                        ELSE 'expense' END AS from_where_the_value_comming,
+                        CASE WHEN COALESCE(SUM(debit) > COALESCE(SUM(credit), 0)) THEN 'expense'
+                        ELSE 'income' END AS from_where_the_value_comming,
 
-                        COALESCE(SUM(debit), 0) as expense, COALESCE(SUM(credit), 0) as income 
+                        COALESCE(SUM(debit), 0) as income , COALESCE(SUM(credit), 0) as expense
                     
 
         """
