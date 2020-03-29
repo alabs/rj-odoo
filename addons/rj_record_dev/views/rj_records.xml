@@ -39,7 +39,7 @@
                 <field name="date_last_stage_update"/>
                 <field name="project_id"/>
 
-                <field name="complexity"/>
+<!--                <field name="complexity"/>-->
                 <field name="user_id"/>
                 <field name="partner_id" filter_domain="[('partner_id', 'child_of', self)]"/>
                 <field name="stage_id"/>
@@ -77,7 +77,7 @@
         <field name="arch" type="xml">
 <!--            <graph string="Tasks Analysis" type="bar">-->
                 <field name="project_id" position="after">
-                    <field name="complexity" type="measure"/>
+<!--                    <field name="complexity" type="measure"/>-->
                     <field name="user_id" type="row"/>
 
                 </field>

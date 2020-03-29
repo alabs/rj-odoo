@@ -5,8 +5,8 @@
         <field name="model">report.project.task.stage</field>
         <field name="arch" type="xml">
             <graph string="Project States" type="bar">
-
-                <field name="user_id"/>
+                <field name="complexity" type="measure"/>
+                <field name="user_id" type="row"/>
                 <field name="state"/>
             </graph>
         </field>

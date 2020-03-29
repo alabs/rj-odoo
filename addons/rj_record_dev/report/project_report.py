@@ -14,6 +14,7 @@ class ReportProjectStageUser(models.Model):
     nbr = fields.Integer('# of Tasks', readonly=True)
     user_id = fields.Many2one('res.users', string='Assigned To', readonly=True)
     managers_ids = fields.Many2many('res.users', string='Assigned To', readonly=True)
+    complexity = fields.Float('Complexity', readonly=True)
 
     state = fields.Selection([
             ('open', 'Abierto'),
@@ -24,7 +25,9 @@ class ReportProjectStageUser(models.Model):
     def _select(self):
         select_str = """
              SELECT
-                    (select 1 ) AS nbr ,t.id as id ,p.project_id as project_id,p.user_id as user_id,t.state as state
+                    (select 1 ) AS nbr,t.name ,CAST(coalesce(t.complexity, '0') AS float) as complexity,
+                    t.id as id ,p.project_id as project_id,
+                    p.user_id as user_id,t.state as state
 
         """
         return select_str
@@ -32,7 +35,7 @@ class ReportProjectStageUser(models.Model):
     def _group_by(self):
         group_by_str = """
                 GROUP BY
-                    t.id,p.project_id,p.user_id,t.state
+                    t.id,p.project_id,p.user_id,t.state,t.complexity,t.name
                     
         """
         return group_by_str
@@ -43,5 +46,6 @@ class ReportProjectStageUser(models.Model):
             CREATE view %s as
               %s
               FROM expedient_managers_users_rel p JOIN project_project as t ON p.project_id = t.id
+              WHERE t.state = 'open'
                 %s
         """ % (self._table, self._select(), self._group_by()))

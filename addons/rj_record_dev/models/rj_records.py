@@ -39,10 +39,10 @@ class ReportProjectTaskUser(models.Model):
 
     project_task = fields.Many2one('project.task',string="Task")
     planned_hours = fields.Char('Planned Hours', readonly=True)
-    complexity = fields.Float('Complexity', readonly=True)
+    # complexity = fields.Float('Complexity', readonly=True)
 
     def _select(self):
-        return super(ReportProjectTaskUser, self)._select() + """,CAST(coalesce(p.complexity, '0') AS float) as complexity,t.planned_hours"""
+        return super(ReportProjectTaskUser, self)._select() + """,t.planned_hours"""
         
 
     def _group_by(self):
@@ -58,7 +58,7 @@ class ReportProjectTaskUser(models.Model):
                         t.project_id,
                         t.priority,
                         t.planned_hours,
-                        p.complexity,
+                       
                         t.company_id,
                         t.partner_id,
                         stage_id,
