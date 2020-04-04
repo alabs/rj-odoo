@@ -11,18 +11,19 @@
     'website': 'https://alabs.org',
     'category': 'Project',
     'license': 'AGPL-3',
-    'version': '0.8',
+    'version': '0.9',
     'installable': True,
     'application': True,
 
     'depends': [
-            'project','base','rj_records'
+            'project','base','rj_records','calendar'
     ],
 
     'data': [
         'views/rj_records.xml',
         'views/clients.xml',
         'views/rj_ir_attachment.xml',
+        'views/calendar_events.xml',
         'report/project_report.xml',
         'report/account_invoice_report.xml',
         'report/account_income_area_report.xml',
