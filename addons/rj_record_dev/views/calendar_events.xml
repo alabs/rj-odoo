@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<odoo>
+
+     <record id="view_view_calendar_event_form_popup2" model="ir.ui.view">
+        <field name="name">project.task.custom.form</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_form2"/>
+        <field name="arch" type="xml">
+            <field name="project_id" position="after">
+                <field name="calendar_id" />
+            </field>
+        </field>
+     </record>
+
+    <record id="calendar.action_calendar_event" model="ir.actions.act_window">
+        <field name="name">Meetings</field>
+        <field name="res_model">calendar.event</field>
+        <field name="view_mode">tree,form,calendar</field>
+        <field name="view_id" ref="calendar.view_calendar_event_tree"/>
+        <field name="search_view_id" ref="calendar.view_calendar_event_search"/>
+        <field name="help" type="html">
+          <p class="o_view_nocontent_smiling_face">
+            Schedule a new meeting
+          </p><p>
+            The calendar is shared between employees and fully integrated with
+            other applications such as the employee leaves or the business
+            opportunities.
+          </p>
+        </field>
+    </record>
+
+
+
+<!--    <menuitem name="Calendario"-->
+<!--    id="project.calendar"-->
+<!--    action="action_view_task"-->
+<!--    sequence="-20"-->
+<!--    groups="base.group_no_one,project.group_project_user" />-->
+
+
+
+<!--    <record id="action_view_calendar_event_tree" model="ir.actions.act_window.view">-->
+<!--        <field name="act_window_id" ref="action_calendar_event"/>-->
+<!--        <field name="sequence" eval="2"/>-->
+<!--        <field name="view_mode">tree</field>-->
+<!--        <field name="view_id" ref="view_calendar_event_tree"/>-->
+<!--    </record>-->
+
+    <menuitem name="Reuniones"
+        id="menu_reuniones"
+        parent="project.calendar"
+        action="calendar.action_calendar_event"
+         />
+
+    <menuitem
+        id="calendar.mail_menu_calendar"
+        name="Calendar"
+        sequence="2"
+        action="calendar.action_calendar_event"
+        web_icon="calendar,static/description/icon.png"
+        groups="rj_record_dev.make_invisible"/>
+
+
+</odoo>
