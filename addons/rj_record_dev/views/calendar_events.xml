@@ -52,6 +52,13 @@
         action="calendar.action_calendar_event"
          />
 
+    <menuitem
+        id="calendar.mail_menu_calendar"
+        name="Calendar"
+        sequence="2"
+        action="calendar.action_calendar_event"
+        web_icon="calendar,static/description/icon.png"
+        groups="rj_record_dev.make_invisible"/>
 
 
 </odoo>
