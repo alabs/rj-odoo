@@ -29,7 +29,9 @@ class ProjectProject(models.Model):
     @api.model
     def create(self, vals):
         sequence = self.env.ref('rj_record_dev.ir_sequence_project_number')
-        vals['name'] = str(sequence.next_by_id())+' - '+ vals['name']
+        apha = str(sequence.next_by_id())
+        vals['name'] = apha+' - '+ vals['name']
+        vals['code'] = apha
         result = super(ProjectProject, self).create(vals)
         return result
 

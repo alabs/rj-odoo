@@ -11,12 +11,12 @@
     'website': 'https://alabs.org',
     'category': 'Project',
     'license': 'AGPL-3',
-    'version': '0.10',
+    'version': '0.11',
     'installable': True,
     'application': True,
 
     'depends': [
-            'project','base','rj_records','calendar'
+            'project','base','rj_records','calendar','web_widget_color'
     ],
 
     'data': [

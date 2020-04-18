@@ -8,6 +8,8 @@
         <field name="arch" type="xml">
             <field name="project_id" position="after">
                 <field name="calendar_id" />
+                <field name="calen_tag" />
+                <field name="color" widget="color"/>
             </field>
         </field>
      </record>
@@ -29,7 +31,19 @@
         </field>
     </record>
 
+    <record id="view_task_calendar_calendar_inherit_color" model="ir.ui.view">
+        <field name="name">project.task.calendar.calendar.inherit</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_calendar"/>
+        <field name="arch" type="xml">
+            <xpath expr="//calendar" position="replace">
+                <calendar date_start="date_deadline" string="Tasks" mode="month" color="user_id">
+                    <field name="name"/>
 
+                </calendar>
+            </xpath>
+        </field>
+    </record>
 
 <!--    <menuitem name="Calendario"-->
 <!--    id="project.calendar"-->
