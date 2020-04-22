@@ -39,7 +39,7 @@
             <xpath expr="//calendar" position="replace">
                 <calendar date_start="date_deadline" string="Tasks" mode="month" color="user_id">
                     <field name="name"/>
-
+                    <field name="color" widget="color"/>
                 </calendar>
             </xpath>
         </field>

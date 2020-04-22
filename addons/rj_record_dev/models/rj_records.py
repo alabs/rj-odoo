@@ -12,6 +12,7 @@ class ProjectProject(models.Model):
     file_attachment = fields.Many2many('ir.attachment',compute="compute_get_attached_file",string="File(s)")
     other_payer = fields.Many2one('res.partner', string="Other Payer")
     physical_box = fields.Integer("Physical Box",help="Enter 4 digits")
+    name2 = fields.Char()
 
     @api.constrains('physical_box')
     def _constaint_physical_box(self):
@@ -30,11 +31,29 @@ class ProjectProject(models.Model):
     def create(self, vals):
         sequence = self.env.ref('rj_record_dev.ir_sequence_project_number')
         apha = str(sequence.next_by_id())
+        vals['name2'] = vals['name']
         vals['name'] = apha+' - '+ vals['name']
         vals['code'] = apha
         result = super(ProjectProject, self).create(vals)
         return result
 
+    @api.multi
+    def _write(self, values):
+        if values.get('code'):
+            name_string = ''
+            names_up = self.name.split(' - ')
+            length = len(names_up)
+            if self.code in names_up:
+                for i in range(length):
+                    if names_up[i] == self.code:
+                        names_up[i] = values.get('code')
+                        name_string = names_up[i] +' - '+name_string
+                    else:
+                        name_string = name_string + names_up[i]
+
+            values['name'] = name_string
+        res = super(ProjectProject, self)._write(values)
+        return res
 
 class ReportProjectTaskUser(models.Model):
     _inherit = "report.project.task.user"

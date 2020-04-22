@@ -11,12 +11,12 @@
     'website': 'https://alabs.org',
     'category': 'Project',
     'license': 'AGPL-3',
-    'version': '0.11',
+    'version': '0.12',
     'installable': True,
     'application': True,
 
     'depends': [
-            'project','base','rj_records','calendar','web_widget_color'
+            'project','base','rj_records','calendar','web_widget_color','web'
     ],
 
     'data': [
@@ -24,6 +24,7 @@
         'security/hide_menu_security.xml',
         'views/rj_records.xml',
         'views/clients.xml',
+        'views/assets.xml',
         'views/rj_ir_attachment.xml',
         'views/calendar_events.xml',
         'report/project_report.xml',
