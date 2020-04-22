@@ -72,7 +72,7 @@
         sequence="2"
         action="calendar.action_calendar_event"
         web_icon="calendar,static/description/icon.png"
-        groups="rj_record_dev.make_invisible"/>
+        />
 
-
+<!--        groups="rj_record_dev.make_invisible"-->
 </odoo>
