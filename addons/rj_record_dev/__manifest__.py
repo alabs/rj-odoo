@@ -21,7 +21,7 @@
 
     'data': [
         'security/ir.model.access.csv',
-        'security/hide_menu_security.xml',
+        # 'security/hide_menu_security.xml',
         'views/rj_records.xml',
         'views/clients.xml',
         'views/assets.xml',
