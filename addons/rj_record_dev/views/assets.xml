@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <template id="web_task_color_assets_backend" name="web_task_color_assets_backend" inherit_id="web.assets_backend">
+      <xpath expr="." position="inside">
+          <!--Be sure to call your module name in place of project_task_agenda_coloring. This is the name of my module! -->
+          <script src="/rj_record_dev/static/src/js/calendar.js" type="text/javascript"></script>
+      </xpath>
+  </template>
+</odoo>
