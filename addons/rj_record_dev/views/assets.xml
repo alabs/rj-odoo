@@ -4,6 +4,7 @@
       <xpath expr="." position="inside">
           <!--Be sure to call your module name in place of project_task_agenda_coloring. This is the name of my module! -->
           <script src="/rj_record_dev/static/src/js/calendar.js" type="text/javascript"></script>
+          <script src="/rj_record_dev/static/src/js/calendar_renderer.js" type="text/javascript"></script>
       </xpath>
   </template>
 </odoo>
