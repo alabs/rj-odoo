@@ -32,26 +32,35 @@ class ProjectProject(models.Model):
         sequence = self.env.ref('rj_record_dev.ir_sequence_project_number')
         apha = str(sequence.next_by_id())
         vals['name2'] = vals['name']
-        vals['name'] = apha+' - '+ vals['name']
-        vals['code'] = apha
+        vals['name'] = vals['name']
+        # vals['name'] = apha+' - '+ vals['name']
+        # vals['code'] = apha
         result = super(ProjectProject, self).create(vals)
+        if result.code:
+            result.analytic_account_id.update({'name':result.code})
         return result
 
+    # @api.multi
+    # def _write(self, values):
+    #     if values.get('code'):
+    #         name_string = ''
+    #         names_up = self.name.split(' - ')
+    #         length = len(names_up)
+    #         if self.code in names_up:
+    #             for i in range(length):
+    #                 if names_up[i] == self.code:
+    #                     names_up[i] = values.get('code')
+    #                     name_string = names_up[i] +' - '+name_string
+    #                 else:
+    #                     name_string = name_string + names_up[i]
+    #
+    #         values['name'] = name_string
+    #     res = super(ProjectProject, self)._write(values)
+    #     return res
     @api.multi
     def _write(self, values):
         if values.get('code'):
-            name_string = ''
-            names_up = self.name.split(' - ')
-            length = len(names_up)
-            if self.code in names_up:
-                for i in range(length):
-                    if names_up[i] == self.code:
-                        names_up[i] = values.get('code')
-                        name_string = names_up[i] +' - '+name_string
-                    else:
-                        name_string = name_string + names_up[i]
-
-            values['name'] = name_string
+            self.analytic_account_id.update({'name': values.get('code')})
         res = super(ProjectProject, self)._write(values)
         return res
 
