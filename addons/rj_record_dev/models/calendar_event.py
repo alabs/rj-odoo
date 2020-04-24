@@ -6,7 +6,7 @@ class CalendarEventProject(models.Model):
     _inherit = 'project.task'
 
     calendar_id = fields.Many2one('calendar.event',string="Meetings")
-    calen_tag = fields.Char("Calendar Tag")
+    calen_tag = fields.Char("Calendar Tag",related="tag_ids.name")
     color = fields.Char("Mark Color")
 
     @api.onchange('calendar_id')
