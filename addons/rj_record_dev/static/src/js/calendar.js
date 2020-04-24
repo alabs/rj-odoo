@@ -17,6 +17,7 @@ odoo.define('rj_record_dev.calendar', function (require) {
             var res = this._super.apply(this, arguments);
             var color_key = evt[this.fieldColor];
             res['color_field'] = "";
+            res['tag_ids'] = "";
             return res;
         },
 
