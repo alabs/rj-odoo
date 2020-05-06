@@ -19,9 +19,12 @@
       <xpath expr="//field[@name='subject_id']" position="after">
         <field name="other_payer"/>
         <field name="physical_box" attrs="{'readonly': [('state', '!=', 'closed')]}"/>
+        <field name="procedimiento"/>
+        <field name="juzgado"/>
       </xpath>
       <xpath expr="//field[@name='procurer']" position="after">
         <field name="code"/>
+        <field name="observaciones"/>
       </xpath>
     </field>
   </record>

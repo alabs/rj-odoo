@@ -11,13 +11,16 @@ class ProjectProject(models.Model):
 
     file_attachment = fields.Many2many('ir.attachment',compute="compute_get_attached_file",string="File(s)")
     other_payer = fields.Many2one('res.partner', string="Other Payer")
-    physical_box = fields.Integer("Physical Box",help="Enter 4 digits")
+    physical_box = fields.Char("Physical Box",help="Enter 4 digits")
+    procedimiento = fields.Char("N° Procedimiento")
+    juzgado = fields.Char("N° Juzgado")
+    observaciones = fields.Char("N° Observaciones")
     name2 = fields.Char()
 
-    @api.constrains('physical_box')
-    def _constaint_physical_box(self):
-        if len(str(self.physical_box)) != 4:
-            raise ValidationError(_('Physical Box must contain 4 digits numeric'))
+    # @api.constrains('physical_box')
+    # def _constaint_physical_box(self):
+    #     if len(str(self.physical_box)) != 4:
+    #         raise ValidationError(_('Physical Box must contain 4 digits numeric'))
 
     def compute_get_attached_file(self):
         file_list = []
