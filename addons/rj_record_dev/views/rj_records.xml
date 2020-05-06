@@ -19,12 +19,30 @@
       <xpath expr="//field[@name='subject_id']" position="after">
         <field name="other_payer"/>
         <field name="physical_box" attrs="{'readonly': [('state', '!=', 'closed')]}"/>
-        <field name="procedimiento"/>
+           <field name="procedimiento"/>
         <field name="juzgado"/>
       </xpath>
       <xpath expr="//field[@name='procurer']" position="after">
         <field name="code"/>
-        <field name="observaciones"/>
+          <field name="observaciones"/>
+      </xpath>
+    </field>
+  </record>
+
+    <record id="project_expedient_view_form_simplified1_form" model="ir.ui.view">
+    <field name="name">project.project.rj_other.view.name.form12</field>
+    <field name="model">project.project</field>
+    <field name="inherit_id" ref="rj_records.project_project_view_form_simplified"/>
+    <field name="arch" type="xml">
+      <xpath expr="//field[@name='subject_id']" position="after">
+        <field name="other_payer"/>
+<!--        <field name="physical_box" attrs="{'readonly': [('state', '!=', 'closed')]}"/>-->
+          <field name="procedimiento"/>
+        <field name="juzgado"/>
+      </xpath>
+      <xpath expr="//field[@name='procurer']" position="after">
+<!--        <field name="code"/>-->
+          <field name="observaciones"/>
       </xpath>
     </field>
   </record>
