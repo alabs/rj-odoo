@@ -14,7 +14,7 @@ class ProjectProject(models.Model):
     physical_box = fields.Char("Physical Box",help="Enter 4 digits")
     procedimiento = fields.Char("N° Procedimiento")
     juzgado = fields.Char("N° Juzgado")
-    observaciones = fields.Char("N° Observaciones")
+    observaciones = fields.Text("N° Observaciones")
     name2 = fields.Char()
 
     # @api.constrains('physical_box')

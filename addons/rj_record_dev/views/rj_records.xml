@@ -24,8 +24,13 @@
       </xpath>
       <xpath expr="//field[@name='procurer']" position="after">
         <field name="code"/>
-          <field name="observaciones"/>
+
       </xpath>
+        <xpath expr="//group" position="after">
+            <group>
+                <field name="observaciones"/>
+            </group>
+        </xpath>
     </field>
   </record>
 
@@ -40,10 +45,15 @@
           <field name="procedimiento"/>
         <field name="juzgado"/>
       </xpath>
-      <xpath expr="//field[@name='procurer']" position="after">
-<!--        <field name="code"/>-->
-          <field name="observaciones"/>
-      </xpath>
+<!--      <xpath expr="//field[@name='procurer']" position="after">-->
+<!--&lt;!&ndash;        <field name="code"/>&ndash;&gt;-->
+<!--          <field name="observaciones"/>-->
+<!--      </xpath>-->
+        <xpath expr="//group" position="after">
+            <group>
+                <field name="observaciones"/>
+            </group>
+        </xpath>
     </field>
   </record>
 
