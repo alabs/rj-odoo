@@ -23,6 +23,25 @@ class ReportAccountReport(models.Model):
 
 
 
+    # def _select(self):
+    #     select_str = """
+    #          SELECT
+    #                 (select 1 ) AS nbr ,
+    #                 p.user_id as lawyer_id,
+    #                 p.area_id as area,
+    #                 aml.id as id,
+    #                 aml.account_id as account_id,
+    #                 aml.create_date as date_time,
+    #                 COALESCE(SUM(debit),0) - COALESCE(SUM(credit), 0) as balance,
+    #                 COALESCE(SUM(debit), 0) as debit,
+    #                 COALESCE(SUM(credit), 0) as income,
+    #                 AVG(credit) as average,
+    #                 (SUM(credit) * 100)::numeric /(SELECT SUM(aml.credit) FROM account_move_line as aml,account_move as account_move_line__move_id,project_project as p, account_invoice as ai WHERE aml.account_id IN (SELECT id FROM account_account WHERE user_type_id IN (SELECT id from account_account_type WHERE internal_group IN ('expense','income'))) AND ("aml"."move_id"="account_move_line__move_id"."id") AND (("account_move_line__move_id"."state" = 'posted')  )
+    #                     AND (("aml"."invoice_id" = "ai"."id")  )
+    #                     AND (("ai"."project_id" = "p"."id")  )  ) AS income_percentage
+    #     """
+    #     return select_str
+
     def _select(self):
         select_str = """
              SELECT
@@ -32,11 +51,10 @@ class ReportAccountReport(models.Model):
                     aml.id as id,
                     aml.account_id as account_id, 
                     aml.create_date as date_time,
-                    COALESCE(SUM(debit),0) - COALESCE(SUM(credit), 0) as balance, 
-                    COALESCE(SUM(debit), 0) as debit, 
-                    COALESCE(SUM(credit), 0) as income,
-                    AVG(credit) as average,
-                    (SUM(credit) * 100)::numeric /(SELECT SUM(aml.credit) FROM account_move_line as aml,account_move as account_move_line__move_id,project_project as p, account_invoice as ai WHERE aml.account_id IN (SELECT id FROM account_account WHERE user_type_id IN (SELECT id from account_account_type WHERE internal_group IN ('expense','income'))) AND ("aml"."move_id"="account_move_line__move_id"."id") AND (("account_move_line__move_id"."state" = 'posted')  ) 
+                   
+                    SUM(ai.amount_total) as income,
+                    AVG(ai.amount_total) as average,
+                    (SUM(ai.amount_total) * 100)::numeric /(SELECT SUM(ai.amount_total) FROM account_move_line as aml,account_move as account_move_line__move_id,project_project as p, account_invoice as ai WHERE aml.account_id IN (SELECT id FROM account_account WHERE user_type_id IN (SELECT id from account_account_type WHERE internal_group IN ('expense','income'))) AND ("aml"."move_id"="account_move_line__move_id"."id") AND (("account_move_line__move_id"."state" = 'posted')  ) 
                         AND (("aml"."invoice_id" = "ai"."id")  ) 
                         AND (("ai"."project_id" = "p"."id")  )  ) AS income_percentage 
         """
@@ -50,16 +68,30 @@ class ReportAccountReport(models.Model):
         """
         return group_by_str
 
+    # def init(self):
+    #     tools.drop_view_if_exists(self._cr, self._table)
+    #     self._cr.execute("""
+    #         CREATE view %s as
+    #           %s
+    #           FROM account_move as account_move_line__move_id,account_move_line as aml,project_project as p, account_invoice as ai
+    #             WHERE aml.account_id IN (SELECT id FROM account_account WHERE user_type_id IN (SELECT id from account_account_type WHERE internal_group IN ('expense','income')))
+    #             AND ("aml"."move_id"="account_move_line__move_id"."id")
+    #             AND (("account_move_line__move_id"."state" = 'posted')  )
+    #             AND (("aml"."invoice_id" = "ai"."id")  )
+    #             AND (("ai"."project_id" = "p"."id")  )
+    #             %s
+    #     """ % (self._table, self._select(), self._group_by()))
+
     def init(self):
         tools.drop_view_if_exists(self._cr, self._table)
         self._cr.execute("""
             CREATE view %s as
               %s
               FROM account_move as account_move_line__move_id,account_move_line as aml,project_project as p, account_invoice as ai
-                WHERE aml.account_id IN (SELECT id FROM account_account WHERE user_type_id IN (SELECT id from account_account_type WHERE internal_group IN ('expense','income')))  
-                AND ("aml"."move_id"="account_move_line__move_id"."id") 
-                AND (("account_move_line__move_id"."state" = 'posted')  ) 
-                AND (("aml"."invoice_id" = "ai"."id")  ) 
+                WHERE aml.account_id IN (SELECT id FROM account_account WHERE user_type_id IN (SELECT id from account_account_type WHERE internal_group IN ('expense','income')))
+                AND ("aml"."move_id"="account_move_line__move_id"."id")
+                AND (("account_move_line__move_id"."state" = 'posted')  )
+                AND (("aml"."invoice_id" = "ai"."id")  )
                 AND (("ai"."project_id" = "p"."id")  ) 
                 %s
         """ % (self._table, self._select(), self._group_by()))
