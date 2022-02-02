@@ -46,23 +46,21 @@ class ReportAccountReport(models.Model):
         select_str = """
              SELECT
                     (select 1 ) AS nbr ,
-                    p.user_id as lawyer_id,
+                    ai.user_id as lawyer_id,
                     p.area_id as area, 
-                    aml.id as id,
-                    aml.account_id as account_id, 
-                    aml.create_date as date_time,
-                   
+                    ai.id as id,
+                    ai.date_invoice as date_time,
                     SUM(ai.amount_total) as income,
                     AVG(ai.amount_total) as average,
-                    (SUM(ai.amount_total) * 100)::numeric /(SELECT SUM(ai.amount_total) FROM account_move_line as aml,account_move as account_move_line__move_id,project_project as p, account_invoice as ai WHERE aml.account_id IN (SELECT id FROM account_account WHERE user_type_id IN (SELECT id from account_account_type WHERE internal_group IN ('expense','income'))) AND ("aml"."move_id"="account_move_line__move_id"."id") AND (("account_move_line__move_id"."state" = 'posted')  ) 
-                        AND (("aml"."invoice_id" = "ai"."id")  ) 
-                        AND (("ai"."project_id" = "p"."id")  )  ) AS income_percentage 
+                    (SUM(ai.amount_total) * 100)::numeric /(SELECT SUM(amount_total)
+ FROM account_invoice 
+ WHERE state='paid' AND type='out_invoice' ) AS income_percentage
         """
         return select_str
 
     def _group_by(self):
         group_by_str = """
-                GROUP BY aml.id,aml.account_id,p.area_id,p.user_id
+                GROUP BY p.area_id,ai.user_id,ai.id,ai.date_invoice
                   
 
         """
@@ -87,11 +85,6 @@ class ReportAccountReport(models.Model):
         self._cr.execute("""
             CREATE view %s as
               %s
-              FROM account_move as account_move_line__move_id,account_move_line as aml,project_project as p, account_invoice as ai
-                WHERE aml.account_id IN (SELECT id FROM account_account WHERE user_type_id IN (SELECT id from account_account_type WHERE internal_group IN ('expense','income')))
-                AND ("aml"."move_id"="account_move_line__move_id"."id")
-                AND (("account_move_line__move_id"."state" = 'posted')  )
-                AND (("aml"."invoice_id" = "ai"."id")  )
-                AND (("ai"."project_id" = "p"."id")  ) 
-                %s
+              From account_invoice as ai, project_project as p where ai.state = 'paid' AND ai.type='out_invoice'  AND ai.project_id = p.id
+               %s
         """ % (self._table, self._select(), self._group_by()))

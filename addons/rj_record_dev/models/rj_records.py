@@ -7,7 +7,8 @@ from odoo.exceptions import UserError,ValidationError
 
 
 class ProjectProject(models.Model):
-    _inherit = 'project.project'
+    _name = 'project.project'
+    _inherit = ['project.project','portal.mixin', 'mail.thread', 'mail.activity.mixin']
 
     file_attachment = fields.Many2many('ir.attachment',compute="compute_get_attached_file",string="File(s)")
     other_payer = fields.Many2one('res.partner', string="Other Payer")

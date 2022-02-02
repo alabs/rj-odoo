@@ -8,6 +8,13 @@
       <xpath expr="//field[@name='user_id']" position="after">
         <field name="file_attachment" invisible="1" widget="many2many_tags"/>
       </xpath>
+        <xpath expr="//div[@class='oe_chatter']" position="replace">
+              <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+        </xpath>
     </field>
   </record>
 

@@ -31,7 +31,7 @@ class ReportAccountReport(models.Model):
     def _select(self):
         select_str = """
              SELECT
-                    (select 1 ) AS nbr, account_id as account_id, account_move_line.account_id as id, 
+                    (select 1 ) AS nbr, account_id as account_id, account_move_line.account_id as id,account_move_line.create_date as date,
                         COALESCE(SUM(debit),0) - COALESCE(SUM(credit), 0) as balance,account_move_line.create_date as date_time,
                         greatest(COALESCE(SUM(debit), 0), COALESCE(SUM(credit), 0)) AS expense_income,
 
