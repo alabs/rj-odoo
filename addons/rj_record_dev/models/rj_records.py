@@ -61,11 +61,14 @@ class ProjectProject(models.Model):
     #         values['name'] = name_string
     #     res = super(ProjectProject, self)._write(values)
     #     return res
+
     @api.multi
     def _write(self, values):
+        if self.area_id.color:
+            values['color'] = self.env['rj_records.area'].search([('id','=',values.get('area_id'))]).color
         if values.get('code'):
             self.analytic_account_id.update({'name': values.get('code')})
-        res = super(ProjectProject, self)._write(values)
+        res = super(ProjectProject, self.sudo())._write(values)
         return res
 
 class ReportProjectTaskUser(models.Model):

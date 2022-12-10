@@ -1,3 +1,4 @@
+from . import lead
 from . import res_partner
 from . import rj_records
 from . import rj_ir_attachment

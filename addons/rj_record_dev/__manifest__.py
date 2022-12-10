@@ -23,6 +23,7 @@
         'security/ir.model.access.csv',
         # 'security/hide_menu_security.xml',
         'views/rj_records.xml',
+        'views/crm_views.xml',
         'views/clients.xml',
         'views/assets.xml',
         'views/rj_ir_attachment.xml',
